@@ -1,0 +1,96 @@
+build/
+
+#### IDEs / Editors
+## Sublime Text
+*.sublime-workspace
+*.sublime-project
+sftp-config.json
+
+## IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+## Eclipse
+.project
+.metadata
+.classpath
+.settings/
+.loadpath
+.buildpath
+local.properties
+
+## NetBeans
+nbactions.xml
+nb-configuration.xml
+nbproject/
+.nbproject/
+nbbuild/
+nbdist/
+
+## VIM
+*.swo
+*.swp
+Session.vim
+.netrwhist
+
+## XCode
+build/
+
+#### Version Control Systems
+## GIT
+!.gitignore
+
+## CVS
+**/CVS/
+**/.cvsignore
+
+## SVN
+**/.svn/
+
+## Mercurial
+**/.hg/
+.hgignore
+
+#### OS
+## Generic
+*~
+*.lock
+*.tmp
+*.bak
+*.log
+
+## Package Managers
+*.deb
+*.rpm
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.msi
+*.msm
+*.msp
+
+## KDE
+**/.directory
+
+## Mac OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.lnk
+
+#### Tools
+## Composer
+composer.phar
+vendor/
+!composer.lock
