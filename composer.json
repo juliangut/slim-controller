@@ -1,0 +1,38 @@
+{
+    "name": "juliangut/slim-controller",
+    "description": "Slim Framework controller creator",
+    "keywords": [
+        "slim",
+        "framework",
+        "controller"
+    ],
+    "homepage": "http://github.com/juliangut/slim-controller",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Julián Gutiérrez",
+            "email": "juliangut@gmail.com",
+            "homepage": "http://juliangut.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "slim/slim": "~2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.7",
+        "phpmd/phpmd": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jgut\\Slim\\Controller\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jgut\\Slim\\ControllerTests\\": "tests/ControllerTests/"
+        }
+    }
+}

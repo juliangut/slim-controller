@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset name="Slim Framework controller creator PHPMD Rule Set"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                        http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>Slim Framework controller creator PHPMD Rule Set</description>
+
+    <!-- Unused code rules -->
+    <!-- <rule ref="rulesets/unusedcode.xml" /> -->
+    <!-- Unused private attributes -->
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateField"/>
+    <!-- Unused private methods -->
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod"/>
+    <!-- Unused local variables -->
+    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable"/>
+    <!-- Unused method parameter -->
+    <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter"/>
+
+
+    <!-- Naming rules -->
+    <!-- <rule ref="rulesets/naming.xml" /> -->
+    <!-- Class constructors should be __construct -->
+    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass" />
+    <!-- Uppercased class/interface constants -->
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions"/>
+    <!-- Boolean method should be of the form isX() or hasX() -->
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName">
+        <properties>
+            <property name="checkParameterizedMethods" value="true"/>
+        </properties>
+    </rule>
+    <!-- Method minimum length (3) -->
+    <rule ref="rulesets/naming.xml/ShortMethodName">
+        <properties>
+            <property name="minimum" value="3"/>
+        </properties>
+    </rule>
+    <!-- Variable minimum length (3), not for variables in for statements -->
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="3"/>
+        </properties>
+    </rule>
+    <!-- Variable maximum length (20) -->
+    <!-- <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="20"/>
+        </properties>
+    </rule> -->
+
+
+    <!-- Design rules -->
+    <!-- <rule ref="rulesets/design.xml" /> -->
+    <!-- Arbitrary exit code -->
+    <rule ref="rulesets/design.xml/ExitExpression"/>
+    <!-- Eval expressions -->
+    <rule ref="rulesets/design.xml/EvalExpression"/>
+    <!-- Goto statements -->
+    <rule ref="rulesets/design.xml/GotoStatement"/>
+    <!-- Excessive number of children (15) -->
+    <rule ref="rulesets/design.xml/NumberOfChildren">
+        <properties>
+            <property name="minimum" value="15"/>
+        </properties>
+    </rule>
+    <!-- Excessive inheritance depth (6) -->
+    <rule ref="rulesets/design.xml/DepthOfInheritance">
+    <properties>
+            <property name="minimum" value="6"/>
+        </properties>
+    </rule>
+    <!-- Excessive class dependencies (13) -->
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="minimum" value="13"/>
+        </properties>
+    </rule>
+
+
+    <!-- Controversial rules -->
+    <!-- <rule ref="rulesets/controversial.xml" /> -->
+    <!-- Avoid superglobals -->
+    <rule ref="rulesets/controversial.xml/Superglobals" />
+    <!-- Use camelCase class name-->
+    <rule ref="rulesets/controversial.xml/CamelCaseClassName" />
+    <!-- Use camelCase class attribute names -->
+    <rule ref="rulesets/controversial.xml/CamelCasePropertyName" />
+    <!-- Use camelCase class method names -->
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
+    <!-- Use camelCase class method parameter names -->
+    <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
+    <!-- Use camelCase class method variable names -->
+    <!-- <rule ref="rulesets/controversial.xml/CamelCaseVariableName" /> -->
+
+
+    <!-- Code size rules -->
+    <!-- <rule ref="rulesets/codesize.xml" /> -->
+    <!-- Cyclomatic complexity: number of decision points in a method
+        plus one for the method entry. 1-4 low, 5-7 moderate, 8-10 high,
+        11+ very high (threshold is 10) -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <properties>
+            <property name="reportLevel" value="10"/>
+        </properties>
+    </rule>
+    <!-- Acyclic execution paths on a method (threshold is 200) -->
+    <rule ref="rulesets/codesize.xml/NPathComplexity">
+        <properties>
+            <property name="minimum" value="200"/>
+        </properties>
+    </rule>
+    <!-- Excessive class length (1000) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum" value="1000"/>
+        </properties>
+    </rule>
+    <!-- Excessive method length (150) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="150" />
+        </properties>
+    </rule>
+    <!-- Excessive parameters list (8) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="8" />
+        </properties>
+    </rule>
+    <!-- Excessive class attributes (15) -->
+    <rule ref="rulesets/codesize.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="15"/>
+        </properties>
+    </rule>
+    <!-- Excessive class methods (20) -->
+    <rule ref="rulesets/codesize.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="20"/>
+        </properties>
+    </rule>
+    <!-- Excessive WMC, time and effort to modify and maintain class (500) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <properties>
+            <property name="maximum" value="500"/>
+        </properties>
+    </rule>
+</ruleset>

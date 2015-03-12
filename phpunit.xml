@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<phpunit
+        bootstrap="./tests/bootstrap.php"
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnSkipped="false"
+        stopOnIncomplete="false"
+        syntaxCheck="false"
+        strict="true"
+        verbose="true"
+        >
+    <testsuites>
+        <testsuite name="Slim Framework controller creator tests">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Code Coverage reports -->
+    <logging>
+        <log type="coverage-html"
+            target="./build/coverage"
+            title="howden_m6"
+            charset="UTF-8"
+            yui="true"
+            highlight="true"
+            lowUpperBound="35"
+            highLowerBound="70"
+        />
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
+        <log type="junit" target="../build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+
+    <!-- Code Coverage reports filter -->
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <ini name="memory_limit" value="-1"/>
+    </php>
+</phpunit>
