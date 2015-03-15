@@ -1,5 +1,3 @@
-build/
-
 #### IDEs / Editors
 ## Sublime Text
 *.sublime-workspace
@@ -89,8 +87,15 @@ ehthumbs.db
 Desktop.ini
 *.lnk
 
+### Development tools
+## Vagrant
+.vagrant/
+
 #### Tools
 ## Composer
 composer.phar
 vendor/
 !composer.lock
+
+## NodeJS
+node_modules/

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Slim Framework controller creator PHP_CodeSniffer Rule Set">
+    <description>Slim Framework controller creator PHP_CodeSniffer Rule Set</description>
+
+    <!-- Import PSR2 entire rule set -->
+    <rule ref="PSR2"/>
+
+    <!-- exclude files/directories -->
+    <exclude-pattern>./build/*</exclude-pattern>
+</ruleset>

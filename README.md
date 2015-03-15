@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/juliangut/slim-controller.svg?branch=master)](https://travis-ci.org/juliangut/slim-controller)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/juliangut/slim-controller/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/juliangut/slim-controller/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/juliangut/slim-controller/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/juliangut/slim-controller/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/juliangut/slim-controller/v/stable.svg)](https://packagist.org/packages/juliangut/controller)
+[![Total Downloads](https://poser.pugx.org/juliangut/slim-controller/downloads.svg)](https://packagist.org/packages/juliangut/slim-controller)
+
 # Juliangut Slim Framework controller creator
 
 Controller creator for Slim Framework.
@@ -15,7 +21,7 @@ composer require juliangut/slim-controller
 Then require_once the autoload file:
 
 ```php
-require_once 'vendor/autoload.php';
+require_once './vendor/autoload.php';
 ```
 
 ## Usage

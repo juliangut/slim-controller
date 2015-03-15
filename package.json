@@ -1,0 +1,29 @@
+{
+    "name": "juliangut-slim-controller",
+    "description": "Slim Framework controller creator",
+    "keywords": [
+        "slim",
+        "framework",
+        "controller"
+    ],
+    "homepage": "http://github.com/juliangut/slim-controller",
+    "author": {
+        "name": "Julián Gutiérrez",
+        "email": "juliangut@gmail.com",
+        "url": "http://juliangut.com"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "~0.4.5",
+        "load-grunt-tasks": "~0.6.0",
+        "grunt-phplint": "~0.0.5",
+        "grunt-phpunit": "~0.3.5",
+        "grunt-phpcs": "~0.2.3",
+        "grunt-phpmd": "~0.1.1",
+        "grunt-phpcpd": "~0.1.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:juliangut/slim-controller.git"
+    }
+}
