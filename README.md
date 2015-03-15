@@ -12,10 +12,10 @@ Allows you to delegate objects creation for each route to the moment they are ne
 
 ## Installation
 
-Best way to install is to using [Composer](https://getcomposer.org/):
+Best way to install is using [Composer](https://getcomposer.org/):
 
 ```
-composer require juliangut/slim-controller
+php composer.phar require juliangut/slim-controller
 ```
 
 Then require_once the autoload file:
