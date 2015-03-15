@@ -1,11 +1,27 @@
 <?php
+/**
+ * Slim Framework controller creator (https://github.com/juliangut/slim-controller)
+ *
+ * @link https://github.com/juliangut/slim-controller for the canonical source repository
+ * @license https://raw.githubusercontent.com/juliangut/slim-controller/master/LICENSE
+ */
 
 namespace Jgut\Slim\Controller;
 
 use Slim\Slim;
 
+/**
+ * Closure manager for Slim routes.
+ */
 class Closure
 {
+    /**
+     * Create closure for Slim route.
+     *
+     * @param string $route
+     * @param string $appName
+     * @return \Closure
+     */
     public static function get($route, $appName = 'default')
     {
         $app = Slim::getInstance($appName);
