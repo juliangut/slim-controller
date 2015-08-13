@@ -8,7 +8,7 @@
 
 namespace Jgut\Slim\Controller;
 
-use Slim\Slim;
+use Interop\Container\ContainerInterface;
 
 /**
  * Base Slim Framework controller.
@@ -16,31 +16,29 @@ use Slim\Slim;
 class Controller
 {
     /**
-     * @var \Slim\Slim
+     * DI container
      *
-     * Slim application
+     * @var \Interop\Container\ContainerInterface
      */
-    protected $app;
+    protected $container;
 
     /**
-     * Get Slim application.
+     * Set DI container
      *
-     * @return \Slim\Slim
+     * @param \Interop\Container\ContainerInterface $container
      */
-    final public function getApplication()
+    final public function setContainer(ContainerInterface $container)
     {
-        return $this->app;
+        $this->container = $container;
     }
 
-    /**
-     * Set Slim application.
-     *
-     * @param \Slim\Slim $app
-     */
-    final public function setApplication(Slim $app)
+    final public function __get($name)
     {
-        $this->app = $app;
+        return $this->container->get($name);
+    }
 
-        return $this;
+    final public function __isset($name)
+    {
+        return $this->container->has($name);
     }
 }

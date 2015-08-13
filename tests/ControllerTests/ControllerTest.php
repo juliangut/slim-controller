@@ -8,26 +8,30 @@
 
 namespace Jgut\Slim\ControllerTests;
 
-use Slim\Slim;
-use Jgut\Slim\Controller\Closure;
+use Slim\Container;
+use Jgut\Slim\Controller\Controller;
 
 /**
- * @covers Jgut\Slim\Controller\Closure
  * @covers Jgut\Slim\Controller\Controller
  */
 class ControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Jgut\Slim\Controller\Closure::get
-     * @covers Jgut\Slim\Controller\Controller::getApplication
-     * @covers Jgut\Slim\Controller\Controller::setApplication
+     * @covers Jgut\Slim\Controller\Controller::setContainer
+     * @covers Jgut\Slim\Controller\Controller::__isset
+     * @covers Jgut\Slim\Controller\Controller::__get
      */
-    public function testClosure()
+    public function testContainer()
     {
-        $app = new Slim();
-        $closure = Closure::get('Jgut\Slim\Controller\Controller:getApplication');
+        $settings = ['a', 'b'];
 
-        $this->assertInstanceOf('\Closure', $closure);
-        $this->assertEquals($closure(), $app);
+        $container = new Container();
+        $container['settings'] = $settings;
+
+        $controller = new Controller;
+        $controller->setContainer($container);
+
+        $this->assertEquals(true, isset($controller->settings));
+        $this->assertEquals($settings, $controller->settings);
     }
 }
