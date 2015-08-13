@@ -35,15 +35,7 @@ class Registrator implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $settings = $this->settings ?: $container->get('settings');
-
-        if (!is_array($settings)) {
-            return;
-        }
-
-        $controllers = $settings['controllers'] ?: [];
-
-        foreach ($controllers as $controller) {
+        foreach ($this->getControllers($container) as $controller) {
             $controller = trim($controller, '\\');
             $FQNController = '\\' . $controller;
 
@@ -61,5 +53,17 @@ class Registrator implements ServiceProviderInterface
                 return $controller;
             };
         }
+    }
+
+    /**
+     * Get controller's settings.
+     *
+     * @return array
+     */
+    private function getControllers(Container $container)
+    {
+        $settings = $this->settings ?: $container->get('settings');
+
+        return is_array($settings) && isset($settings['controllers']) ? $settings['controllers'] : [];
     }
 }
