@@ -39,7 +39,7 @@ class Registrator implements ServiceProviderInterface
             $controller = trim($controller, '\\');
             $FQNController = '\\' . $controller;
 
-            if ($container->has($controller)) {
+            if (isset($container[$controller])) {
                 continue;
             }
 
