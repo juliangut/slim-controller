@@ -1,8 +1,10 @@
-[![Build Status](https://travis-ci.org/juliangut/slim-controller.svg?branch=master)](https://travis-ci.org/juliangut/slim-controller)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/juliangut/slim-controller/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/juliangut/slim-controller/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/juliangut/slim-controller/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/juliangut/slim-controller/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/juliangut/slim-controller/v/stable.svg)](https://packagist.org/packages/juliangut/controller)
-[![Total Downloads](https://poser.pugx.org/juliangut/slim-controller/downloads.svg)](https://packagist.org/packages/juliangut/slim-controller)
+[![Latest Version](https://img.shields.io/github/release/juliangut/slim-controller.svg?style=flat-square)](https://packagist.org/packages/juliangut/slim-controller)
+[![License](https://img.shields.io/packagist/l/juliangut/slim-controller.svg?style=flat-square)](https://github.com/juliangut/slim-controller/blob/master/LICENSE)
+
+[![Build status](https://img.shields.io/travis/juliangut/slim-controller.svg?style=flat-square)](https://travis-ci.org/juliangut/slim-controller)
+[![Code Quality](https://img.shields.io/scrutinizer/g/juliangut/slim-controller.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/slim-controller)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/juliangut/slim-controller.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/slim-controller)
+[![Total Downloads](https://img.shields.io/packagist/dt/juliangut/slim-controller.svg?style=flat-square)](https://packagist.org/packages/juliangut/slim-controller)
 
 # Juliangut Slim Framework controller creator
 
