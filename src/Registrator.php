@@ -62,7 +62,7 @@ class Registrator implements ServiceProviderInterface
      */
     private function getControllers(Container $container)
     {
-        $settings = $this->settings ?: $container->get('settings');
+        $settings = $this->settings ?: $container['settings'];
 
         return is_array($settings) && isset($settings['controllers']) ? $settings['controllers'] : [];
     }
