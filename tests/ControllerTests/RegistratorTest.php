@@ -23,7 +23,7 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
     public function testNoRegistration()
     {
         $container = new Container();
-        $container->register(new Registrator());
+        Registrator::register($container);
 
         $container->get('Jgut\Slim\Controller\Controller');
     }
@@ -31,15 +31,36 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Jgut\Slim\Controller\Registrator::register
      */
-    public function testRegistration()
+    public function testDefaultRegistration()
     {
         $settings = [
+            'controllers' => [
+                'Jgut\Slim\Controller\Controller',
+                'Jgut\Slim\Controller\Controller',
+            ],
+        ];
+
+        $container = new Container();
+        $container['settings'] = $settings;
+        Registrator::register($container);
+
+        $this->assertInstanceOf(
             'Jgut\Slim\Controller\Controller',
+            $container->get('Jgut\Slim\Controller\Controller')
+        );
+    }
+
+    /**
+     * @covers Jgut\Slim\Controller\Registrator::register
+     */
+    public function testCustomRegistration()
+    {
+        $settings = [
             'Jgut\Slim\Controller\Controller',
         ];
 
         $container = new Container();
-        $container->register(new Registrator($settings));
+        Registrator::register($container, $settings);
 
         $this->assertInstanceOf(
             'Jgut\Slim\Controller\Controller',

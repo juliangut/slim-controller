@@ -48,8 +48,8 @@ $app = new \Slim\App($settings);
 // Fetch DI Container
 $container = $app->getContainer();
 
-// Register Controllers registrator
-$container->register(new \Jgut\Slim\Controller\Registrator);
+// Register Controllers
+\Jgut\Slim\Controller\Registrator::register($container);
 
 // Define route (\MyController has already been registered)
 $app->get('hello/app', '\MyController:dispatch');

@@ -9,33 +9,25 @@
 namespace Jgut\Slim\Controller;
 
 use Pimple\Container;
-use Pimple\ServiceProviderInterface;
 
-class Registrator implements ServiceProviderInterface
+class Registrator
 {
-    /**
-     * controllers settings.
-     *
-     * @var array
-     */
-    private $settings;
-
-    /**
-     * @param array $settings
-     */
-    public function __construct(array $settings = [])
-    {
-        $this->settings = $settings;
-    }
-
     /**
      * Register controller's service providers
      *
-     * @param  \Pimple\Container $container
+     * @param \Pimple\Container $container
+     * @param array $settings
      */
-    public function register(Container $container)
+    public static function register(Container $container, array $settings = [])
     {
-        foreach ($this->getControllers($container) as $controller) {
+        $controllers = [];
+        if (!empty($settings)) {
+            $controllers = $settings;
+        } elseif (isset($container['settings']['controllers']) && is_array($container['settings']['controllers'])) {
+            $controllers = $container['settings']['controllers'];
+        }
+
+        foreach ($controllers as $controller) {
             $controller = trim($controller, '\\');
             $FQNController = '\\' . $controller;
 
@@ -53,21 +45,5 @@ class Registrator implements ServiceProviderInterface
                 return $controller;
             };
         }
-    }
-
-    /**
-     * Get controller's settings.
-     *
-     * @return array
-     */
-    private function getControllers(Container $container)
-    {
-        if (!empty($this->settings)) {
-            return $this->settings;
-        } elseif (isset($container['settings']['controllers']) && is_array($container['settings']['controllers'])) {
-            return $container['settings']['controllers'];
-        }
-
-        return [];
     }
 }
