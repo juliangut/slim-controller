@@ -14,7 +14,7 @@ use Pimple\ServiceProviderInterface;
 class Registrator implements ServiceProviderInterface
 {
     /**
-     * \Slim\App settings.
+     * controllers settings.
      *
      * @var array
      */
@@ -23,7 +23,7 @@ class Registrator implements ServiceProviderInterface
     /**
      * @param array $settings
      */
-    public function __construct($settings = null)
+    public function __construct(array $settings = [])
     {
         $this->settings = $settings;
     }
@@ -62,8 +62,12 @@ class Registrator implements ServiceProviderInterface
      */
     private function getControllers(Container $container)
     {
-        $settings = $this->settings ?: $container['settings'];
+        if (!empty($this->settings)) {
+            return $this->settings;
+        } elseif (isset($container['settings']['controllers']) && is_array($container['settings']['controllers'])) {
+            return $container['settings']['controllers'];
+        }
 
-        return is_array($settings) && isset($settings['controllers']) ? $settings['controllers'] : [];
+        return [];
     }
 }

@@ -23,7 +23,7 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
     public function testNoRegistration()
     {
         $container = new Container();
-        $container->register(new Registrator('settings'));
+        $container->register(new Registrator());
 
         $container->get('Jgut\Slim\Controller\Controller');
     }
@@ -34,10 +34,8 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
     public function testRegistration()
     {
         $settings = [
-            'controllers' => [
-                'Jgut\Slim\Controller\Controller',
-                'Jgut\Slim\Controller\Controller',
-            ],
+            'Jgut\Slim\Controller\Controller',
+            'Jgut\Slim\Controller\Controller',
         ];
 
         $container = new Container();
