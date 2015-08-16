@@ -8,23 +8,28 @@
 
 namespace Jgut\Slim\Controller;
 
-use Pimple\Container;
+use Interop\Container\ContainerInterface;
 
 class Registrator
 {
     /**
      * Register controller's service providers
      *
-     * @param \Pimple\Container $container
+     * @param \Interop\Container\ContainerInterface $container
      * @param array $settings
      */
-    public static function register(Container $container, array $settings = [])
+    public static function register(ContainerInterface $container, array $settings = [])
     {
         $controllers = [];
+
         if (!empty($settings)) {
             $controllers = $settings;
-        } elseif (isset($container['settings']['controllers']) && is_array($container['settings']['controllers'])) {
-            $controllers = $container['settings']['controllers'];
+        } else {
+            $settings = $container->get('settings');
+
+            if (isset($settings['controllers']) && is_array($settings['controllers'])) {
+                $controllers = $settings['controllers'];
+            }
         }
 
         foreach ($controllers as $controller) {
