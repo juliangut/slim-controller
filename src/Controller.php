@@ -32,11 +32,21 @@ class Controller
         $this->container = $container;
     }
 
+    /**
+     * Bridge container get
+     *
+     * @param string $name
+     */
     final public function __get($name)
     {
         return $this->container->get($name);
     }
 
+    /**
+     * Bridge container has
+     *
+     * @param string $name
+     */
     final public function __isset($name)
     {
         return $this->container->has($name);

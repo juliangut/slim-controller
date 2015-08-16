@@ -12,6 +12,8 @@ Base controller class and controllers registrator for Slim Framework.
 
 Allows you to define controllers on Slim settings so they get automatically registered into the DI container.
 
+Controller's registrator assumes the DI container you are using implements ArrayAccess interface, as default Slim\Container does, although it only forces to implement `Interop\Container\ContainerInterface`
+
 ## Installation
 
 Best way to install is using [Composer](https://getcomposer.org/):
@@ -83,6 +85,8 @@ This controller registration method works only for controllers whose constructor
 ```php
 $container['\MyController'] = function($container) {
     $controller = new \MyController('customParameter');
+
+    // Register container into the controller
     $controller->setContainer($container);
 
     return $controller;
