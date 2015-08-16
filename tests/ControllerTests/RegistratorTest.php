@@ -36,7 +36,6 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
         $settings = [
             'controllers' => [
                 'Jgut\Slim\Controller\Controller',
-                'Jgut\Slim\Controller\Controller',
             ],
         ];
 

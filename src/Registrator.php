@@ -36,10 +36,6 @@ class Registrator
             $controller = trim($controller, '\\');
             $FQNController = '\\' . $controller;
 
-            if (isset($container[$controller])) {
-                continue;
-            }
-
             $container[$controller] = function ($container) use ($FQNController) {
                 $controller = new $FQNController();
 
