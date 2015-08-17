@@ -8,11 +8,9 @@
 
 # Juliangut Slim Framework controller creator
 
-Base controller class and controllers registrator for Slim Framework.
+Class route creation boilerplate, allows you to define your controller classes as services to be pulled out from it easily, extending from a base controller class.
 
-Allows you to define controllers on Slim settings so they get automatically registered into the DI container.
-
-Controller's registrator assumes the DI container you are using implements ArrayAccess interface, as default Slim\Container does, although it only forces to implement `Interop\Container\ContainerInterface`
+This package is specially created for DI containers that doesn't provide auto discovery of services. Default Slim container based on Pimple does not. If you use another DI container such as [PHP-DI](https://github.com/PHP-DI/PHP-DI) you don't need this package so give it a try with [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di)
 
 ## Installation
 
@@ -43,6 +41,8 @@ return [
 ```
 
 ```php
+use \Jgut\Slim\Controller\Resolver;
+
 // Create Slim app
 $settings = require __DIR__ . 'settings.php';
 $app = new \Slim\App($settings);
@@ -51,7 +51,9 @@ $app = new \Slim\App($settings);
 $container = $app->getContainer();
 
 // Register Controllers
-\Jgut\Slim\Controller\Registrator::register($container);
+foreach (Resolver::resolve($container) as $controller => $callback) {
+    $container[$controller] = $callback;
+}
 
 // Define route (\MyController has already been registered)
 $app->get('hello/app', '\MyController:dispatch');
@@ -92,6 +94,8 @@ $container['\MyController'] = function($container) {
     return $controller;
 }
 ```
+
+If this is your case you should try using a different DI container with Slim, PHP-DI container will take care of your class route dependencies extracting those dependencies out from the container itself. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di) and forget about this package.
 
 ## Contributing
 

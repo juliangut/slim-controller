@@ -33,6 +33,16 @@ class Controller
     }
 
     /**
+     * Get DI container
+     *
+     * @return \Interop\Container\ContainerInterface
+     */
+    final public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
      * Bridge container get
      *
      * @param string $name

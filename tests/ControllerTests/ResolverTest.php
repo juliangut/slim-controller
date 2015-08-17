@@ -9,27 +9,29 @@
 namespace Jgut\Slim\ControllerTests;
 
 use Slim\Container;
-use Jgut\Slim\Controller\Registrator;
+use Jgut\Slim\Controller\Resolver;
 
 /**
- * @covers Jgut\Slim\Controller\Registrator
+ * @covers Jgut\Slim\Controller\Resolver
  */
-class RegistratorTest extends \PHPUnit_Framework_TestCase
+class ResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Jgut\Slim\Controller\Registrator::register
+     * @covers Jgut\Slim\Controller\Resolver::resolve
      * @expectedException RuntimeException
      */
     public function testNoRegistration()
     {
         $container = new Container();
-        Registrator::register($container);
+        foreach (Resolver::resolve($container) as $controller => $callback) {
+            $container[$controller] = $callback;
+        }
 
         $container->get('Jgut\Slim\Controller\Controller');
     }
 
     /**
-     * @covers Jgut\Slim\Controller\Registrator::register
+     * @covers Jgut\Slim\Controller\Resolver::resolve
      */
     public function testDefaultRegistration()
     {
@@ -41,7 +43,9 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
 
         $container = new Container();
         $container['settings'] = $settings;
-        Registrator::register($container);
+        foreach (Resolver::resolve($container) as $controller => $callback) {
+            $container[$controller] = $callback;
+        }
 
         $this->assertInstanceOf(
             'Jgut\Slim\Controller\Controller',
@@ -50,7 +54,7 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Slim\Controller\Registrator::register
+     * @covers Jgut\Slim\Controller\Resolver::resolve
      */
     public function testCustomRegistration()
     {
@@ -59,10 +63,12 @@ class RegistratorTest extends \PHPUnit_Framework_TestCase
         ];
 
         $container = new Container();
-        Registrator::register($container, $settings);
+        foreach (Resolver::resolve($container, $settings) as $controller => $callback) {
+            $container[$controller] = $callback;
+        }
 
         $this->assertInstanceOf(
-            'Jgut\Slim\Controller\Controller',
+            '\Jgut\Slim\Controller\Controller',
             $container->get('Jgut\Slim\Controller\Controller')
         );
     }

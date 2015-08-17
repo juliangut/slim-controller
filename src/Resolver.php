@@ -10,16 +10,11 @@ namespace Jgut\Slim\Controller;
 
 use Interop\Container\ContainerInterface;
 
-class Registrator
+class Resolver
 {
-    /**
-     * Register controller's service providers
-     *
-     * @param \Interop\Container\ContainerInterface $container
-     * @param array $settings
-     */
-    public static function register(ContainerInterface $container, array $settings = [])
+    public static function resolve(ContainerInterface $container, array $settings = [])
     {
+        $callbacks = [];
         $controllers = [];
 
         if (!empty($settings)) {
@@ -36,7 +31,7 @@ class Registrator
             $controller = trim($controller, '\\');
             $FQNController = '\\' . $controller;
 
-            $container[$controller] = function ($container) use ($FQNController) {
+            $callbacks[$controller] = function ($container) use ($FQNController) {
                 $controller = new $FQNController();
 
                 if ($controller instanceof Controller) {
@@ -46,5 +41,7 @@ class Registrator
                 return $controller;
             };
         }
+
+        return $callbacks;
     }
 }
