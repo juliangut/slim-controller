@@ -6,9 +6,11 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/juliangut/slim-controller.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/slim-controller)
 [![Total Downloads](https://img.shields.io/packagist/dt/juliangut/slim-controller.svg?style=flat-square)](https://packagist.org/packages/juliangut/slim-controller)
 
-# Juliangut Slim Framework controller creator
+# Slim3 controller management
 
-Class route creation boilerplate, allows you to define your controller classes as services to be pulled out from it easily, extending from a base controller class.
+Class route creation boilerplate, allows you to define your controller classes as services to be pulled out from container easily, extending from a base controller class.
+
+In your class route you can access services as you would in a function route.
 
 This package is specially created for DI containers that doesn't provide auto discovery of services. Default Slim container based on Pimple does not. If you use another DI container such as [PHP-DI](https://github.com/PHP-DI/PHP-DI) you don't need this package so give it a try with [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di)
 
@@ -28,30 +30,22 @@ require_once './vendor/autoload.php';
 
 ## Usage
 
-Defined settings array `controllers` key in `settings.php`
-
-```php
-return [
-    ...
-    'controllers' => [
-        'MyController',
-    ],
-    ...
-];
-```
-
 ```php
 use \Jgut\Slim\Controller\Resolver;
 
+// Define your controllers
+$controllers = [
+    'MyController',
+];
+
 // Create Slim app
-$settings = require __DIR__ . 'settings.php';
-$app = new \Slim\App($settings);
+$app = new \Slim\App();
 
 // Fetch DI Container
 $container = $app->getContainer();
 
 // Register Controllers
-foreach (Resolver::resolve($container) as $controller => $callback) {
+foreach (Resolver::resolve($container, $controllers) as $controller => $callback) {
     $container[$controller] = $callback;
 }
 
@@ -62,7 +56,7 @@ $app->get('hello/app', '\MyController:dispatch');
 $app->run();
 ```
 
-If your controller extends `Jgut\Slim\Controller\Controller` it is automatically composed with the DI container so you can access its data the same way you do on a `Closure` route callback
+If your controller extends `Jgut\Slim\Controller\Controller` it is automatically composed with the DI container so you can access its services the same way you do on a `Closure` route callback
 
 ```php
 use Jgut\Slim\Controller\Controller;
@@ -73,12 +67,13 @@ class MyController extends Controller
 {
     public function displatch(ServerRequestInterface $request, ResponseInterface $response, array $args)
     {
-        // Pull Twig view service (\Slim\Views\Twig)
+        // Pull Twig view service given it was defined
         return $this->view->render($response, 'dispatch.twig');
-        ...
     }
 }
 ```
+
+You can use the resolver to define your `Class` routes callback and not extend `Controller` on those classes, in this case your controller won't have access to the container but it will still be a valid callback.
 
 ### Caveat
 
@@ -95,7 +90,7 @@ $container['\MyController'] = function($container) {
 }
 ```
 
-If this is your case you should try using a different DI container with Slim, PHP-DI container will take care of your class route dependencies extracting those dependencies out from the container itself. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di) and forget about this package.
+For more complex scenarios in which you need to setup your controller you should try using a different DI container with Slim, PHP-DI container will take care of your class route dependencies extracting those dependencies out from the container itself, or allow you to define them with specific dependencies definitions. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di).
 
 ## Contributing
 

@@ -6,7 +6,7 @@
  * @license https://raw.githubusercontent.com/juliangut/slim-controller/master/LICENSE
  */
 
-namespace Jgut\Slim\ControllerTests;
+namespace Jgut\Slim\Controller\Tests;
 
 use Slim\Container;
 use Jgut\Slim\Controller\Controller;

@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Jgut\\Slim\\ControllerTests\\": "tests/ControllerTests/"
+            "Jgut\\Slim\\Controller\\Tests\\": "tests/Controller"
         }
     }
 }

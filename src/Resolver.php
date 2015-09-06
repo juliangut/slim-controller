@@ -12,20 +12,9 @@ use Interop\Container\ContainerInterface;
 
 class Resolver
 {
-    public static function resolve(ContainerInterface $container, array $settings = [])
+    public static function resolve(ContainerInterface $container, array $controllers)
     {
         $callbacks = [];
-        $controllers = [];
-
-        if (!empty($settings)) {
-            $controllers = $settings;
-        } else {
-            $settings = $container->get('settings');
-
-            if (isset($settings['controllers']) && is_array($settings['controllers'])) {
-                $controllers = $settings['controllers'];
-            }
-        }
 
         foreach ($controllers as $controller) {
             $controller = trim($controller, '\\');
