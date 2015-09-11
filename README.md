@@ -45,7 +45,7 @@ $app = new \Slim\App();
 $container = $app->getContainer();
 
 // Register Controllers
-foreach (Resolver::resolve($container, $controllers) as $controller => $callback) {
+foreach (Resolver::resolve($controllers) as $controller => $callback) {
     $container[$controller] = $callback;
 }
 
@@ -56,16 +56,16 @@ $app->get('hello/app', '\MyController:dispatch');
 $app->run();
 ```
 
-If your controller extends `Jgut\Slim\Controller\Controller` it is automatically composed with the DI container so you can access its services the same way you do on a `Closure` route callback
+If your controller implements `Jgut\Slim\Controller\Controller` it has the DI container automatically injected, you can access it by `getContainer` method.
+
+If your controller extends `Jgut\Slim\Controller\Base` you can also directly access container services the same way you do on a `Closure` route callback. Simply take care to not define class attributes with the same name as services in the container.
 
 ```php
-use Jgut\Slim\Controller\Controller;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Jgut\Slim\Controller\Base as BaseController;
 
-class MyController extends Controller
+class MyController extends BaseController
 {
-    public function displatch(ServerRequestInterface $request, ResponseInterface $response, array $args)
+    public function displatch($request, $response, array $args)
     {
         // Pull Twig view service given it was defined
         return $this->view->render($response, 'dispatch.twig');
@@ -73,24 +73,28 @@ class MyController extends Controller
 }
 ```
 
-You can use the resolver to define your `Class` routes callback and not extend `Controller` on those classes, in this case your controller won't have access to the container but it will still be a valid callback.
+You can use the resolver to define your `Class` routes callback and not implement `Controller` or extend `Base` on those classes, in this case your controller won't have access to the container but it will still be a valid callback.
 
 ### Caveat
 
 This controller registration method works only for controllers whose constructor doesn't need any parameters. In case you need a controller with paramenters in its `__construct()` method you can still benefit from `\Jgut\Slim\Controller\Controller` but you have to register it yourself
 
 ```php
+use Jgut\Slim\Controller\Controller;
+
 $container['\MyController'] = function($container) {
     $controller = new \MyController('customParameter');
 
     // Register container into the controller
-    $controller->setContainer($container);
+    if ($controller instanceof Controller) {
+        $controller->setContainer($container);
+    }
 
     return $controller;
 }
 ```
 
-For more complex scenarios in which you need to setup your controller you should try using a different DI container with Slim, PHP-DI container will take care of your class route dependencies extracting those dependencies out from the container itself, or allow you to define them with specific dependencies definitions. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di).
+For more complex scenarios in which you need to setup your controller with constructor parameters or setters you should definitely try using a different DI container. For example PHP-DI container will take care of your controller class dependencies extracting them from the container itself, or allow you to define them with specific dependencies definitions. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di).
 
 ## Contributing
 

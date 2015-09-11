@@ -22,17 +22,17 @@ class ResolverTest extends \PHPUnit_Framework_TestCase
     public function testDefaultRegistration()
     {
         $controllers = [
-            'Jgut\Slim\Controller\Controller',
+            'Jgut\Slim\Controller\Base',
         ];
 
         $container = new Container();
-        foreach (Resolver::resolve($container, $controllers) as $controller => $callback) {
+        foreach (Resolver::resolve($controllers) as $controller => $callback) {
             $container[$controller] = $callback;
         }
 
         $this->assertInstanceOf(
-            'Jgut\Slim\Controller\Controller',
-            $container->get('Jgut\Slim\Controller\Controller')
+            'Jgut\Slim\Controller\Base',
+            $container->get('Jgut\Slim\Controller\Base')
         );
     }
 }

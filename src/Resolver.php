@@ -12,15 +12,20 @@ use Interop\Container\ContainerInterface;
 
 class Resolver
 {
-    public static function resolve(ContainerInterface $container, array $controllers)
+    /**
+     * Create service callbacks.
+     *
+     * @param  array  $controllers
+     * @return array
+     */
+    public static function resolve(array $controllers)
     {
         $callbacks = [];
 
         foreach ($controllers as $controller) {
-            $controller = trim($controller, '\\');
-            $FQNController = '\\' . $controller;
+            $FQNController = '\\' . trim($controller, '\\');
 
-            $callbacks[$controller] = function ($container) use ($FQNController) {
+            $callbacks[$controller] = function (ContainerInterface $container) use ($FQNController) {
                 $controller = new $FQNController();
 
                 if ($controller instanceof Controller) {

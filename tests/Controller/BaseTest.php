@@ -9,18 +9,18 @@
 namespace Jgut\Slim\Controller\Tests;
 
 use Slim\Container;
-use Jgut\Slim\Controller\Controller;
+use Jgut\Slim\Controller\Base;
 
 /**
- * @covers Jgut\Slim\Controller\Controller
+ * @covers Jgut\Slim\Controller\Base
  */
-class ControllerTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Jgut\Slim\Controller\Controller::setContainer
-     * @covers Jgut\Slim\Controller\Controller::getContainer
-     * @covers Jgut\Slim\Controller\Controller::__isset
-     * @covers Jgut\Slim\Controller\Controller::__get
+     * @covers Jgut\Slim\Controller\Base::setContainer
+     * @covers Jgut\Slim\Controller\Base::getContainer
+     * @covers Jgut\Slim\Controller\Base::__isset
+     * @covers Jgut\Slim\Controller\Base::__get
      */
     public function testContainer()
     {
@@ -29,7 +29,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $container = new Container();
         $container['settings'] = $settings;
 
-        $controller = new Controller;
+        $controller = new Base;
         $controller->setContainer($container);
 
         $this->assertInstanceOf('\Slim\Container', $controller->getContainer());
