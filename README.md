@@ -10,16 +10,16 @@
 
 Class route creation boilerplate, allows you to define your controller classes as services to be pulled out from container easily, extending from a base controller class.
 
-In your class route you can access services as you would in a function route.
+I strongly suggest you don't use this library but for rapid prototyping or certain use cases. If you really want to follow SOLID principles, don't use this package and either directly inject your dependencies in the controller class, use the container to create and inject dependencies or try another container such as PHP-DI with [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di)
 
-This package is specially created for DI containers that doesn't provide auto discovery of services. Default Slim container based on Pimple does not. If you use another DI container such as [PHP-DI](https://github.com/PHP-DI/PHP-DI) you don't need this package so give it a try with [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di)
+> I cannot stress this enough, this library is meant to be used with default Slim container and for certain cases only.
 
 ## Installation
 
 Best way to install is using [Composer](https://getcomposer.org/):
 
 ```
-php composer.phar require juliangut/slim-controller
+composer require juliangut/slim-controller
 ```
 
 Then require_once the autoload file:
@@ -38,10 +38,8 @@ $controllers = [
     'MyController',
 ];
 
-// Create Slim app
+// Create Slim app and fetch DI Container
 $app = new \Slim\App();
-
-// Fetch DI Container
 $container = $app->getContainer();
 
 // Register Controllers
@@ -58,7 +56,7 @@ $app->run();
 
 If your controller implements `Jgut\Slim\Controller\Controller` it has the DI container automatically injected, you can access it by `getContainer` method.
 
-If your controller extends `Jgut\Slim\Controller\Base` you can also directly access container services the same way you do on a `Closure` route callback. Simply take care to not define class attributes with the same name as services in the container.
+If your controller extends `Jgut\Slim\Controller\Base` you can also directly access container services the same way you do on a `Closure` route callback. Simply take care to not define class attributes with the same name as services in the container. To do this container is injected in the controller and `__get` and `__isset` magic methods are defined to look into the container.
 
 ```php
 use Jgut\Slim\Controller\Base as BaseController;
@@ -73,11 +71,15 @@ class MyController extends BaseController
 }
 ```
 
-You can use the resolver to define your `Class` routes callback and not implement `Controller` or extend `Base` on those classes, in this case your controller won't have access to the container but it will still be a valid callback.
+You can use the resolver to define your `class` routes callback and not implement `Controller` or extend `Base` on those classes, in this case your controller won't have access to the container but it will still be a valid callback.
+
+### Important notice
+
+As a general rule of thumb directly injecting container is considered a bad practice as you are actually hiding your dependencies, by fetching them from the container, instead of defining them in the class. You'll be using the container as a service locator rather than a true DIC.
 
 ### Caveat
 
-This controller registration method works only for controllers whose constructor doesn't need any parameters. In case you need a controller with paramenters in its `__construct()` method you can still benefit from `\Jgut\Slim\Controller\Controller` but you have to register it yourself
+This controller registration works only for controllers whose constructor doesn't need any parameters. In case you need a controller with paramenters in its `__construct()` method you can still benefit from `\Jgut\Slim\Controller\Controller` but you have to register it yourself.
 
 ```php
 use Jgut\Slim\Controller\Controller;
@@ -85,7 +87,7 @@ use Jgut\Slim\Controller\Controller;
 $container['\MyController'] = function($container) {
     $controller = new \MyController('customParameter');
 
-    // Register container into the controller
+    // Set container into the controller
     if ($controller instanceof Controller) {
         $controller->setContainer($container);
     }
@@ -93,8 +95,6 @@ $container['\MyController'] = function($container) {
     return $controller;
 }
 ```
-
-For more complex scenarios in which you need to setup your controller with constructor parameters or setters you should definitely try using a different DI container. For example PHP-DI container will take care of your controller class dependencies extracting them from the container itself, or allow you to define them with specific dependencies definitions. Give it a look at [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di).
 
 ## Contributing
 
