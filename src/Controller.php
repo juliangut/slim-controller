@@ -1,6 +1,6 @@
 <?php
 /**
- * Slim Framework controller creator (https://github.com/juliangut/slim-controller).
+ * Slim Framework controller creator (https://github.com/juliangut/slim-controller)
  *
  * @link https://github.com/juliangut/slim-controller for the canonical source repository
  *
