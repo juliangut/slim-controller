@@ -13,16 +13,17 @@ matrix:
     allow_failures:
         - php: hhvm
 
-install:
-    - travis_retry composer self-update
-    - travis_retry composer install --no-interaction --prefer-source --dev
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then travis_retry composer require satooshi/php-coveralls:dev-master --no-interaction ; fi
 
 script:
-    - ./vendor/bin/phpcs --standard=./phpcs.xml ./src
-    - ./vendor/bin/phpmd ./src text ./phpmd.xml
-    - ./vendor/bin/phpcpd ./src
-    - ./vendor/bin/phpunit --configuration ./phpunit.xml
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then vendor/bin/phpcs --standard=PSR2 src tests ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then vendor/bin/phpmd src text unusedcode,naming,design,controversial,codesize ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then vendor/bin/phpcpd src ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then vendor/bin/phpunit ; fi
 
 after_script:
-  - if [ "$TRAVIS_PHP_VERSION" == '5.6' ]; then wget https://scrutinizer-ci.com/ocular.phar ; fi
-  - if [ "$TRAVIS_PHP_VERSION" == '5.6' ]; then php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml ; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then travis_retry php vendor/bin/coveralls -v ; fi
