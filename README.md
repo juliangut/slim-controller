@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/juliangut/slim-controller.svg?style=flat-square)](https://github.com/juliangut/slim-controller/blob/master/LICENSE)
 
 [![Build status](https://img.shields.io/travis/juliangut/slim-controller.svg?style=flat-square)](https://travis-ci.org/juliangut/slim-controller)
-[![Style](https://styleci.io/repos/59418987/shield)](https://styleci.io/repos/qvy45V)
+[![Style](https://styleci.io/repos/42014429/shield)](https://styleci.io/repos/42014429)
 [![Code Quality](https://img.shields.io/scrutinizer/g/juliangut/slim-controller.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/slim-controller)
 [![Code Coverage](https://img.shields.io/coveralls/juliangut/slim-controller.svg?style=flat-square)](https://coveralls.io/github/juliangut/slim-controller)
 [![Total Downloads](https://img.shields.io/packagist/dt/juliangut/slim-controller.svg?style=flat-square)](https://packagist.org/packages/juliangut/slim-controller)
