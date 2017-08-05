@@ -10,6 +10,8 @@
 
 # Slim3 controller management
 
+## NOTICE: To anyone using this package you should consider moving to [juliangut/slim-routing](https://github.com/juliangut/slim-routing)
+
 Class route creation boilerplate, allows you to define your controller classes as services to be pulled out from container easily, extending from a base controller class.
 
 I strongly suggest you don't use this library but for rapid prototyping or certain use cases. If you really want to follow SOLID principles, don't use this package and either directly inject your dependencies in the controller class, use the container to create and inject dependencies or try another container such as PHP-DI with [juliangut/slim-php-di](https://github.com/juliangut/slim-php-di)
